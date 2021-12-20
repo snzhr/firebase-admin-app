@@ -32,7 +32,15 @@
             placeholder="Search"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-success me-2" type="submit">
+            Search
+          </button>
+          <button
+            class="btn btn-outline-primary"
+            @click="$router.push('/login')"
+          >
+            Login
+          </button>
         </form>
       </div>
     </div>
