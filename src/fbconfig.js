@@ -1,10 +1,6 @@
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import firebase from 'firebase';
+import 'firebase/firestore'
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCKNbX9uSq1SqlzA8Tzd8e-8gXi3wLz3U0",
   authDomain: "fir-admin-21f90.firebaseapp.com",
@@ -15,7 +11,25 @@ const firebaseConfig = {
   measurementId: "G-BLT195BFDG"
 };
 
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+
+export const createCar = ({model, year, transmission}) =>{
+  db.collection("cars").add({
+    model,
+    year, 
+    transmission 
+})
+// .then((docRef) => {
+//     console.log("Document written with ID: ", docRef.id);
+// })
+// .catch((error) => {
+//     console.error("Error adding document: ", error);
+// });
+
+console.log(model, year, transmission);
+}
 
 export default firebaseConfig

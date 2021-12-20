@@ -57,7 +57,7 @@ export default {
     logout() {
       firebase.auth().signOut();
       this.$store.state.isAuthenticated = false;
-      this.$router.push("/login");
+      this.$router.push("/");
     },
   },
 };
