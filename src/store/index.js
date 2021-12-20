@@ -2,8 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    adminUsername: '',
-    adminPassword: ''
+   isAuthenticated: false
   },
   mutations: {
   },

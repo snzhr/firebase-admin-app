@@ -1,6 +1,6 @@
 <template>
   <div class="form__container">
-    <form @submit.prevent="">
+    <form v-if="!$store.state.isAuthenticated" @submit.prevent="">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
@@ -20,8 +20,16 @@
           id="exampleInputPassword1"
         />
       </div>
+
+      <div v-if="error" class="alert alert-warning" role="alert">
+        {{ error }}
+      </div>
+
       <button @click="login" class="btn btn-primary float-end">Login</button>
     </form>
+    <div v-else>
+      <h1>You are already logged in</h1>
+    </div>
   </div>
 </template>
 
@@ -32,6 +40,7 @@ export default {
     return {
       username: "",
       password: "",
+      error: null,
     };
   },
   methods: {
@@ -40,10 +49,11 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.username, this.password)
         .then((data) => {
+          this.$store.state.isAuthenticated = true;
           this.$router.replace("/");
         })
         .catch((err) => {
-          console.log(err);
+          this.error = err.message;
         });
     },
   },

@@ -25,7 +25,7 @@
             <router-link class="nav-link" to="/about">About</router-link>
           </li>
         </ul>
-        <form class="d-flex" @submit.prevent="">
+        <!-- <form class="d-flex" @submit.prevent="">
           <input
             class="form-control me-2"
             type="search"
@@ -35,17 +35,33 @@
           <button class="btn btn-outline-success me-2" type="submit">
             Search
           </button>
-          <button
-            class="btn btn-outline-primary"
-            @click="$router.push('/login')"
-          >
-            Login
-          </button>
-        </form>
+        </form> -->
+        <button
+          v-if="!$store.state.isAuthenticated"
+          class="btn btn-outline-primary"
+          @click="$router.push('/login')"
+        >
+          Login
+        </button>
+        <button @click="logout" v-else class="btn btn-outline-danger">
+          Logout
+        </button>
       </div>
     </div>
   </nav>
 </template>
+<script>
+import firebase from "firebase";
+export default {
+  methods: {
+    logout() {
+      firebase.auth().signOut();
+      this.$store.state.isAuthenticated = false;
+      this.$router.push("/login");
+    },
+  },
+};
+</script>
 <style scoped>
 a.router-link-exact-active {
   color: darkslategrey !important;
