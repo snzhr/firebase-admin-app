@@ -56,6 +56,7 @@
         </div>
         <!-- Modal body end -->
         <div class="modal-footer">
+          <Loader v-if="imgUploading" />
           <button
             type="button"
             class="btn btn-secondary"
@@ -91,7 +92,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import Loader from "@/components/Loader.vue";
 export default {
+  components: {
+    Loader,
+  },
   data() {
     return {
       car: {

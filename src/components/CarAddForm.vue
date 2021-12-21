@@ -37,7 +37,8 @@
         type="file"
         id="formFile"
       />
-      <div v-show="imgUploading">Image is loading. Please wait ...</div>
+      <!-- <div v-show="imgUploading">Image is loading. Please wait ...</div> -->
+      <Loader v-if="imgUploading" />
     </div>
     <button
       :disabled="imgNotUploaded"
@@ -51,7 +52,11 @@
 <script>
 import { createCar } from "@/fbconfig.js";
 import firebase from "firebase";
+import Loader from "@/components/Loader.vue";
 export default {
+  components: {
+    Loader,
+  },
   data() {
     return {
       car: {

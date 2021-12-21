@@ -11,7 +11,7 @@
 import { mapState } from "vuex";
 import CarAddForm from "@/components/CarAddForm.vue";
 export default {
-  name: "Home",
+  name: "AddCar",
   components: {
     CarAddForm,
   },
