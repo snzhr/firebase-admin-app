@@ -1,6 +1,6 @@
 <template>
   <div class="home container mt-5">
-    <div v-if="!isAuthenticated">
+    <div v-if="isAuthenticated">
       <car-add-form />
     </div>
     <div v-else>You have to login in order to continue</div>

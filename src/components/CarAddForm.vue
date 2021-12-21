@@ -29,11 +29,28 @@
       <option value="Automatic">Automatic</option>
       <option value="Manual">Manual</option>
     </select>
-    <button @click="createNewCar" class="btn btn-primary">Add</button>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Car image</label>
+      <input
+        @change="fileHandler"
+        class="form-control"
+        type="file"
+        id="formFile"
+      />
+      <div v-show="imgUploading">Image is loading. Please wait ...</div>
+    </div>
+    <button
+      :disabled="imgNotUploaded"
+      @click="createNewCar"
+      class="btn btn-primary"
+    >
+      Add
+    </button>
   </div>
 </template>
 <script>
 import { createCar } from "@/fbconfig.js";
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -41,12 +58,41 @@ export default {
         model: "",
         year: null,
         transmission: "",
+        img: null,
+        imageUrl: "",
       },
+      imgNotUploaded: true,
+      imgUploading: false,
     };
+  },
+  watch: {
+    car: {
+      handler(newValue) {
+        if (newValue.imageUrl) {
+          this.imgNotUploaded = false;
+          this.imgUploading = false;
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     createNewCar() {
       createCar(this.car);
+    },
+    async fileHandler(e) {
+      try {
+        this.imgUploading = true;
+        const carImg = e.target.files[0];
+        const storageRef = firebase.storage().ref();
+        const fileRef = storageRef.child(carImg.name);
+        await fileRef.put(carImg);
+        const imageUrl = await fileRef.getDownloadURL();
+        this.car.img = carImg.name;
+        this.car.imageUrl = imageUrl;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
