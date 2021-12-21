@@ -14,7 +14,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
+export const db = firebase.firestore();
 
 
 export const createCar = ({model, year, transmission, img,imageUrl}) =>{
@@ -33,5 +33,3 @@ export const createCar = ({model, year, transmission, img,imageUrl}) =>{
 });
 // console.log(model, year, transmission, img, imageUrl);
 }
-
-export default firebaseConfig
