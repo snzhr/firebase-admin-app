@@ -13,9 +13,6 @@ export default createStore({
     REMOVE_CAR(state,payload){
       state.carList.splice(state.carList.indexOf(payload), 1)
     },
-    // UPDTE_CAR(state, payload){
-
-    // }
   },
   actions: {
     getCars({commit}){
@@ -45,7 +42,6 @@ export default createStore({
     async updateCar({commit},car){
       return  await db.collection("cars").doc(car.id).update(car)
       .then(() => {
-        // commit("UPATE_CAR",car)
         console.log("Document successfully updated!");
       })
       .catch((error) => {

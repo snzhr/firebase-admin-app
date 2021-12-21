@@ -30,25 +30,14 @@
             <router-link
               v-if="$store.state.isAuthenticated"
               class="nav-link"
-              to="/carlist"
-              >All cars</router-link
+              to="/addcar"
+              >Add new car</router-link
             >
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/cars">Cars</router-link>
           </li>
         </ul>
-        <!-- <form class="d-flex" @submit.prevent="">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success me-2" type="submit">
-            Search
-          </button>
-        </form> -->
         <button
           v-if="!$store.state.isAuthenticated"
           class="btn btn-outline-primary"
@@ -56,9 +45,9 @@
         >
           Login
         </button>
-        <button @click="logout" v-else class="btn btn-outline-danger">
-          Logout
-        </button>
+        <div v-else class="admin__buttons">
+          <button @click="logout" class="btn btn-outline-danger">Logout</button>
+        </div>
       </div>
     </div>
   </nav>
