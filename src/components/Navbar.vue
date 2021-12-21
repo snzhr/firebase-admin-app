@@ -27,6 +27,14 @@
             >
           </li>
           <li class="nav-item">
+            <router-link
+              v-if="$store.state.isAuthenticated"
+              class="nav-link"
+              to="/carlist"
+              >All cars</router-link
+            >
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/cars">Cars</router-link>
           </li>
         </ul>

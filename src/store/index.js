@@ -1,12 +1,44 @@
 import { createStore } from 'vuex'
+import { db } from "../fbconfig";
 
 export default createStore({
   state: {
+    carList: [],
    isAuthenticated: false
   },
   mutations: {
+    SET_CARS(state, payload){
+       state.carList = payload
+    },
+    REMOVE_CAR(state,payload){
+      state.carList.splice(state.carList.indexOf(payload), 1)
+    }
   },
   actions: {
+    getCars({commit}){
+    db.collection("cars")
+      .get()
+      .then((querySnapshot) => {
+        let cars = []
+        querySnapshot.forEach((doc) => {
+          cars.push({
+            id: doc.id,
+            ...doc.data()
+          })
+        });
+        commit('SET_CARS', cars)
+      });
+    },
+
+    removeCar({commit}, payload){
+      db.collection("cars").doc(payload.id).delete().then(() => {
+        console.log("Document successfully deleted!");
+        commit("REMOVE_CAR", payload)
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+    // console.log(payload);
+    }
   },
   modules: {
   }

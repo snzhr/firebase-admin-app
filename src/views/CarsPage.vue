@@ -6,7 +6,7 @@
         class="card"
         style="width: 20rem"
         v-for="car in carList"
-        :key="car.model"
+        :key="car.id"
       >
         <img :src="car.imageUrl" class="card-img-top" :alt="car.model" />
         <div class="card-body">
@@ -25,21 +25,13 @@
   </div>
 </template>
 <script>
-import { db } from "../fbconfig";
+import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      carList: [],
-    };
+  computed: {
+    ...mapState(["carList"]),
   },
-  created() {
-    db.collection("cars")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.carList.push(doc.data());
-        });
-      });
+  mounted() {
+    this.$store.dispatch("getCars");
   },
 };
 </script>
