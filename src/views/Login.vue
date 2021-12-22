@@ -49,8 +49,13 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.username, this.password)
         .then((data) => {
-          this.$store.state.isAuthenticated = true;
-          this.$router.replace("/");
+          console.log("user logged in", data.user);
+          if (data.user) {
+            this.$store.state.isAuthenticated = true;
+            this.$router.replace("/");
+          } else {
+            console.log("User signed out");
+          }
         })
         .catch((err) => {
           this.error = err.message;

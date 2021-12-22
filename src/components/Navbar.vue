@@ -55,6 +55,11 @@
 <script>
 import firebase from "firebase";
 export default {
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.$store.state.isAuthenticated = !!user;
+    });
+  },
   methods: {
     logout() {
       firebase.auth().signOut();
