@@ -57,7 +57,7 @@ export default {
   computed: {
     ...mapState(["carList"]),
   },
-  mounted() {
+  created() {
     this.$store.dispatch("getCars");
   },
 };

@@ -34,6 +34,14 @@
               >Edit cars</router-link
             >
           </li>
+          <li class="nav-item">
+            <router-link
+              v-if="$store.state.isAuthenticated"
+              class="nav-link"
+              to="/bookings"
+              >Bookings</router-link
+            >
+          </li>
         </ul>
         <button
           v-if="!$store.state.isAuthenticated"
