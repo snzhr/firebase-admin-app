@@ -15,6 +15,26 @@ export default createStore({
     },
   },
   actions: {
+    createCar({commit},{model, year, fuel,drivetype, transmission, price,img,imageUrl}){
+      db.collection("cars").add({
+        model,
+        year, 
+        fuel,
+        drivetype,
+        transmission,
+        price,
+        img,
+        imageUrl  
+    })
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+    // console.log(model, year, fuel,drivetype, transmission, price,img,imageUrl);
+    },
+
     getCars({commit}){
     db.collection("cars")
       .get()

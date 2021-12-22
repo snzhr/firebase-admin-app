@@ -50,8 +50,13 @@
           </select>
           <div class="mb-3">
             <label for="formFile" class="form-label">Car image</label>
-            <input class="form-control" type="file" id="formFile" />
-            <!-- <div v-show="imgUploading">Image is loading. Please wait ...</div> -->
+            <input
+              @change="fileHandler"
+              class="form-control"
+              type="file"
+              id="formFile"
+            />
+            <div v-show="imgUploading">Image is loading. Please wait ...</div>
           </div>
         </div>
         <!-- Modal body end -->
@@ -91,6 +96,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import { mapState, mapActions } from "vuex";
 import Loader from "@/components/Loader.vue";
 export default {
@@ -120,6 +126,20 @@ export default {
     },
     updateCar() {
       this.$store.dispatch("updateCar", this.car);
+    },
+    async fileHandler(e) {
+      try {
+        this.imgUploading = true;
+        const carImg = e.target.files[0];
+        const storageRef = firebase.storage().ref();
+        const fileRef = storageRef.child(carImg.name);
+        await fileRef.put(carImg);
+        const imageUrl = await fileRef.getDownloadURL();
+        this.car.img = carImg.name;
+        this.car.imageUrl = imageUrl;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   created() {

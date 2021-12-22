@@ -13,7 +13,7 @@ export default {};
 
 <style scoped>
 .lds-ring {
-  display: inline-block;
+  display: block;
   position: relative;
   width: 80px;
   height: 80px;

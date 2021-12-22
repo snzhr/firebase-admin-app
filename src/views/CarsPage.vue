@@ -1,20 +1,18 @@
 <template>
   <div class="about container mt-3">
     <h1>Cars</h1>
-    <div class="cars d-flex justify-content-around">
+    <Loader class="customLoader" v-if="carList.length === 0" />
+
+    <div class="cars d-flex flex-wrap justify-content-between">
       <div
         class="card"
-        style="width: 20rem"
+        style="width: 18rem"
         v-for="car in carList"
         :key="car.id"
       >
         <img :src="car.imageUrl" class="card-img-top" :alt="car.model" />
         <div class="card-body">
           <h5 class="card-title">{{ car.model }}</h5>
-          <!-- <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p> -->
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">{{ car.year }}</li>
@@ -26,7 +24,11 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import Loader from "../components/Loader.vue";
 export default {
+  components: {
+    Loader,
+  },
   computed: {
     ...mapState(["carList"]),
   },
@@ -35,3 +37,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.customLoader {
+  margin: auto;
+}
+</style>

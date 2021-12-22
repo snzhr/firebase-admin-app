@@ -16,20 +16,3 @@ firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();
 
-
-export const createCar = ({model, year, transmission, img,imageUrl}) =>{
-  db.collection("cars").add({
-    model,
-    year, 
-    transmission,
-    img,
-    imageUrl
-})
-.then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-})
-.catch((error) => {
-    console.error("Error adding document: ", error);
-});
-// console.log(model, year, transmission, img, imageUrl);
-}

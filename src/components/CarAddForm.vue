@@ -1,56 +1,82 @@
 <template>
-  <div class="car__add__form">
-    <div class="form-floating mb-3">
-      <input
-        v-model="car.model"
-        type="text"
-        class="form-control"
-        id="floatingInput"
-        placeholder="Mercedes"
-      />
-      <label for="floatingInput">Car model</label>
+  <div class="car__add__form row">
+    <div class="col-sm-8 mx-auto">
+      <div class="mb-3">
+        <input
+          v-model="car.model"
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Car model"
+        />
+      </div>
+
+      <select class="form-select mb-3" v-model="car.steeringWheel">
+        <option value="">Steering wheel</option>
+        <option value="">Left</option>
+        <option value="">Right</option>
+      </select>
+
+      <select class="form-select mb-3" v-model="car.year">
+        <option value="">Manufactured year</option>
+        <option v-for="year in 41" :key="year" :value="year + offset">
+          {{ year + offset }}
+        </option>
+      </select>
+
+      <select class="form-select mb-3" v-model="car.fuel">
+        <option value="">Fuel type</option>
+        <option value="">Gasoline</option>
+        <option value="">Diesel</option>
+      </select>
+
+      <select class="form-select mb-3" v-model="car.drivetype">
+        <option value="">Type of drive</option>
+        <option value="">All-wheel-drive</option>
+        <option value="">Front-wheel-drive</option>
+        <option value="">Rear-wheel-drive</option>
+      </select>
+
+      <select class="form-select mb-3" v-model="car.transmission">
+        <option value="">Select car transmission</option>
+        <option value="Automatic">Automatic</option>
+        <option value="Manual">Manual</option>
+        <option value="Continuously variable transmission">
+          Continuously variable transmission
+        </option>
+        <option value="Semi-automatic and dual-clutch transmissions">
+          Semi-automatic and dual-clutch transmissions.
+        </option>
+      </select>
+      <div class="mb-3">
+        <input
+          v-model="car.price"
+          type="number"
+          class="form-control"
+          placeholder="Car price"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Car image</label>
+        <input
+          @change="fileHandler"
+          class="form-control"
+          type="file"
+          id="formFile"
+        />
+        <div v-show="imgUploading">Image is loading. Please wait ...</div>
+      </div>
+      <button
+        :disabled="imgNotUploaded"
+        @click="createNewCar"
+        class="btn btn-primary"
+      >
+        Add
+      </button>
     </div>
-    <div class="form-floating mb-3">
-      <input
-        v-model="car.year"
-        type="number"
-        class="form-control"
-        id="floatingPassword"
-        placeholder="Year"
-      />
-      <label for="floatingPassword">Year</label>
-    </div>
-    <select
-      class="form-select form-select-lg mb-3"
-      v-model="car.transmission"
-      aria-label="Default select example"
-    >
-      <option value="">Select car transmission</option>
-      <option value="Automatic">Automatic</option>
-      <option value="Manual">Manual</option>
-    </select>
-    <div class="mb-3">
-      <label for="formFile" class="form-label">Car image</label>
-      <input
-        @change="fileHandler"
-        class="form-control"
-        type="file"
-        id="formFile"
-      />
-      <!-- <div v-show="imgUploading">Image is loading. Please wait ...</div> -->
-      <Loader v-if="imgUploading" />
-    </div>
-    <button
-      :disabled="imgNotUploaded"
-      @click="createNewCar"
-      class="btn btn-primary"
-    >
-      Add
-    </button>
   </div>
 </template>
 <script>
-import { createCar } from "@/fbconfig.js";
 import firebase from "firebase";
 import Loader from "@/components/Loader.vue";
 export default {
@@ -61,13 +87,18 @@ export default {
     return {
       car: {
         model: "",
-        year: null,
+        steeringWheel: "",
+        year: "",
+        fuel: "",
+        drivetype: "",
         transmission: "",
+        price: "",
         img: null,
         imageUrl: "",
       },
       imgNotUploaded: true,
       imgUploading: false,
+      offset: 1979,
     };
   },
   watch: {
@@ -83,7 +114,7 @@ export default {
   },
   methods: {
     createNewCar() {
-      createCar(this.car);
+      this.$store.dispatch("createCar", this.car);
     },
     async fileHandler(e) {
       try {
@@ -103,5 +134,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>
