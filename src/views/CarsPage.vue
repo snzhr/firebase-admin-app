@@ -5,12 +5,29 @@
     <div v-if="carList.length === 0">No cars</div>
     <div v-else class="cars d-flex flex-wrap">
       <div
-        class="card mx-2"
+        class="card position-relative mx-2"
         style="width: 18rem"
         v-for="car in carList"
         :key="car.id"
       >
-        <img :src="car.imageUrl" class="card-img-top" :alt="car.model" />
+        <div
+          v-if="car.booked"
+          class="bg-danger position-absolute end-0 p-1 m-1 rounded text-white"
+        >
+          Booked
+        </div>
+        <div
+          v-if="car.booked === false"
+          class="bg-success position-absolute end-0 p-1 m-1 rounded text-white"
+        >
+          Available
+        </div>
+        <img
+          @click="$router.push(`/car/${car.id}`)"
+          :src="car.imageUrl"
+          class="card-img-top"
+          :alt="car.model"
+        />
         <div class="card-body">
           <h5 class="card-title" @click="$router.push(`/car/${car.id}`)">
             {{ car.model }}

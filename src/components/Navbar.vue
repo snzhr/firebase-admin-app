@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar align-items-center navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="#">Avto</a>
+      <span class="navbar-brand" @click="$router.push('/')">Car rent</span>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,9 +15,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link class="nav-link" to="/">Home</router-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <router-link
               v-if="$store.state.isAuthenticated"
@@ -69,6 +69,11 @@ export default {
 <style scoped>
 nav {
   background-color: darkslategray;
+}
+.navbar-brand {
+  color: white !important;
+  font-weight: 600;
+  cursor: pointer;
 }
 a {
   color: white !important;

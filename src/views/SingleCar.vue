@@ -1,11 +1,12 @@
 <template>
+  <booking-form :car="car" />
   <div class="single__car my-5 container">
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-6">
           <img
             :src="car.imageUrl"
-            class="d-block mx-auto rounded-start"
+            class="img-fluid d-block mx-auto rounded-start"
             :alt="car.model"
           />
         </div>
@@ -36,15 +37,16 @@
               <small class="text-muted">Manufactured year:</small>
               {{ car.year }}
             </p>
+            <button
+              v-show="car.booked === false"
+              class="btn btn-warning"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Book
+            </button>
+            <p v-show="car.booked === true">Not available</p>
           </div>
-          <button
-            v-show="car.booked === false"
-            class="btn btn-warning"
-            @click="bookCar(car)"
-          >
-            Book
-          </button>
-          <p v-show="car.booked === true">Not available</p>
         </div>
       </div>
     </div>
@@ -53,49 +55,30 @@
 
 <script>
 import { db } from "../fbconfig.js";
+import BookingForm from "../components/BookingForm.vue";
 export default {
+  components: {
+    BookingForm,
+  },
   data() {
     return {
       car: {},
     };
   },
   created() {
-    this.$store.state.carList.find((car) => {
-      if (car.id === this.$route.params.id) {
-        this.car = car;
-        console.log("car is : ", car);
-      }
-    });
-    // db.collection("cars")
-    //   .doc(this.$route.params.id)
-    //   .get()
-    //   .then((doc) => {
-    //     if (doc.exists) {
-    //       this.car = doc.data();
-    //       //   console.log("Document data:", doc.data());
-    //     } else {
-    //       console.log("No such document!");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error getting document:", error);
-    //   });
-  },
-  methods: {
-    bookCar(car) {
-      return db
-        .collection("cars")
-        .doc(car.id)
-        .update({
-          booked: true,
-        })
-        .then(() => {
-          console.log("Document successfully updated!");
-        })
-        .catch((error) => {
-          console.error("Error updating document: ", error);
-        });
-    },
+    db.collection("cars")
+      .doc(this.$route.params.id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          this.car = doc.data();
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
   },
 };
 </script>
