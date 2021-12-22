@@ -1,5 +1,5 @@
 <template>
-  <div class="home container mt-5">
+  <div class="home container mt-3">
     <div v-if="isAuthenticated">
       <car-add-form />
     </div>

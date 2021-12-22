@@ -9,7 +9,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit car</h5>
           <button
             type="button"
             class="btn-close"
@@ -87,7 +87,7 @@
         </div>
         <!-- Modal body end -->
         <div class="modal-footer">
-          <Loader v-if="imgUploading" />
+          <Loader v-show="$store.state.carAddedLoader" />
           <button
             type="button"
             class="btn btn-secondary"
@@ -103,22 +103,43 @@
     </div>
   </div>
 
-  <ul class="list-group container">
+  <div class="container my-3">
     <h1>Car list admin</h1>
-    <li class="list-group-item" v-for="car in carList" :key="car.model">
-      <h3>{{ car.model }}</h3>
-      <p>{{ car.year }}</p>
-      <p>{{ car.transmission }}</p>
-      <p
-        @click="edit(car)"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+    <div class="d-flex justify-content-between">
+      <div
+        class="card mb-3 mx-2"
+        style="width: 45vw"
+        v-for="car in carList"
+        :key="car.model"
       >
-        Edit
-      </p>
-      <p @click="removeCar(car)">Delete</p>
-    </li>
-  </ul>
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              :src="car.imageUrl"
+              class="img-fluid rounded-start"
+              :alt="car.model"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ car.model }}</h5>
+              <button
+                class="btn btn-primary me-3"
+                @click="edit(car)"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Edit
+              </button>
+              <button class="btn btn-danger" @click="removeCar(car)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -142,7 +163,6 @@ export default {
         img: null,
         imageUrl: "",
       },
-      imgNotUploaded: true,
       imgUploading: false,
       offset: 1979,
     };
@@ -167,6 +187,7 @@ export default {
       this.car = val;
     },
     updateCar() {
+      this.$store.state.carAddedLoader = true;
       this.$store.dispatch("updateCar", this.car);
     },
     async fileHandler(e) {

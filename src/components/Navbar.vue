@@ -1,10 +1,7 @@
 <template>
-  <nav
-    class="navbar navbar-expand-lg navbar-light"
-    style="background-color: #e3f2fd"
-  >
+  <nav class="navbar align-items-center navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand" href="#">Avto</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
@@ -34,19 +31,19 @@
               v-if="$store.state.isAuthenticated"
               class="nav-link"
               to="/cars"
-              >Cars</router-link
+              >Edit cars</router-link
             >
           </li>
         </ul>
         <button
           v-if="!$store.state.isAuthenticated"
-          class="btn btn-outline-primary"
+          class="btn btn-primary"
           @click="$router.push('/login')"
         >
           Login
         </button>
         <div v-else class="admin__buttons">
-          <button @click="logout" class="btn btn-outline-danger">Logout</button>
+          <button @click="logout" class="btn btn-danger">Logout</button>
         </div>
       </div>
     </div>
@@ -70,7 +67,15 @@ export default {
 };
 </script>
 <style scoped>
+nav {
+  background-color: darkslategray;
+}
+a {
+  color: white !important;
+}
 a.router-link-exact-active {
-  color: darkslategrey !important;
+  color: white !important;
+  border: 1px solid white;
+  border-radius: 0.5em;
 }
 </style>

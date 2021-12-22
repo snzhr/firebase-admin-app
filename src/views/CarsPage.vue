@@ -1,11 +1,11 @@
 <template>
-  <div class="about container mt-3">
+  <div class="about container my-3">
     <h1>Cars</h1>
     <Loader class="customLoader" v-if="carList.length === 0" />
 
-    <div class="cars d-flex flex-wrap justify-content-between">
+    <div class="cars d-flex flex-wrap">
       <div
-        class="card"
+        class="card mx-2"
         style="width: 18rem"
         v-for="car in carList"
         :key="car.id"
@@ -15,8 +15,14 @@
           <h5 class="card-title">{{ car.model }}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{ car.year }}</li>
-          <li class="list-group-item">{{ car.transmission }}</li>
+          <li class="list-group-item">Price per day: {{ car.price }}$</li>
+          <li class="list-group-item">Year: {{ car.year }}</li>
+          <li class="list-group-item">Transmission: {{ car.transmission }}</li>
+          <li class="list-group-item">Drive type: {{ car.drivetype }}</li>
+          <li class="list-group-item">Fuel type:{{ car.fuel }}</li>
+          <li class="list-group-item">
+            Steering wheel: {{ car.steeringWheel }}
+          </li>
         </ul>
       </div>
     </div>

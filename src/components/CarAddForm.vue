@@ -73,6 +73,7 @@
       >
         Add
       </button>
+      <Loader v-if="$store.state.carAddedLoader" />
     </div>
   </div>
 </template>
@@ -114,6 +115,7 @@ export default {
   },
   methods: {
     createNewCar() {
+      this.$store.state.carAddedLoader = true;
       this.$store.dispatch("createCar", this.car);
     },
     async fileHandler(e) {

@@ -4,7 +4,8 @@ import { db } from "../fbconfig";
 export default createStore({
   state: {
     carList: [],
-   isAuthenticated: false
+   isAuthenticated: false,
+   carAddedLoader: false
   },
   mutations: {
     SET_CARS(state, payload){
@@ -13,11 +14,15 @@ export default createStore({
     REMOVE_CAR(state,payload){
       state.carList.splice(state.carList.indexOf(payload), 1)
     },
+    CHANGE_LOADER_STATUS(state){
+      state.carAddedLoader = false
+    }
   },
   actions: {
-    createCar({commit},{model, year, fuel,drivetype, transmission, price,img,imageUrl}){
+    createCar({commit},{model,steeringWheel, year, fuel,drivetype, transmission, price,img,imageUrl}){
       db.collection("cars").add({
         model,
+        steeringWheel,
         year, 
         fuel,
         drivetype,
@@ -27,6 +32,7 @@ export default createStore({
         imageUrl  
     })
     .then((docRef) => {
+        commit("CHANGE_LOADER_STATUS")
         console.log("Document written with ID: ", docRef.id);
     })
     .catch((error) => {
@@ -62,6 +68,7 @@ export default createStore({
     async updateCar({commit},car){
       return  await db.collection("cars").doc(car.id).update(car)
       .then(() => {
+        commit("CHANGE_LOADER_STATUS")
         console.log("Document successfully updated!");
       })
       .catch((error) => {
