@@ -13,8 +13,8 @@
 
       <select class="form-select mb-3" v-model="car.steeringWheel">
         <option value="">Steering wheel</option>
-        <option value="">Left</option>
-        <option value="">Right</option>
+        <option value="Left">Left</option>
+        <option value="Right">Right</option>
       </select>
 
       <select class="form-select mb-3" v-model="car.year">
@@ -26,15 +26,15 @@
 
       <select class="form-select mb-3" v-model="car.fuel">
         <option value="">Fuel type</option>
-        <option value="">Gasoline</option>
-        <option value="">Diesel</option>
+        <option value="Gasoline">Gasoline</option>
+        <option value="Diesel">Diesel</option>
       </select>
 
       <select class="form-select mb-3" v-model="car.drivetype">
         <option value="">Type of drive</option>
-        <option value="">All-wheel-drive</option>
-        <option value="">Front-wheel-drive</option>
-        <option value="">Rear-wheel-drive</option>
+        <option value="All-wheel-drive">All-wheel-drive</option>
+        <option value="Front-wheel-drive">Front-wheel-drive</option>
+        <option value="Rear-wheel-drive">Rear-wheel-drive</option>
       </select>
 
       <select class="form-select mb-3" v-model="car.transmission">

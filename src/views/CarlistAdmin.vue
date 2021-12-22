@@ -19,35 +19,61 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="form-floating mb-3">
+          <div class="mb-3">
             <input
               v-model="car.model"
               type="text"
               class="form-control"
               id="floatingInput"
-              placeholder="Mercedes"
+              placeholder="Car model"
             />
-            <label for="floatingInput">Car model</label>
           </div>
-          <div class="form-floating mb-3">
-            <input
-              v-model="car.year"
-              type="number"
-              class="form-control"
-              id="floatingPassword"
-              placeholder="Year"
-            />
-            <label for="floatingPassword">Year</label>
-          </div>
-          <select
-            v-model="car.transmission"
-            class="form-select form-select-lg mb-3"
-            aria-label="Default select example"
-          >
+
+          <select class="form-select mb-3" v-model="car.steeringWheel">
+            <option value="">Steering wheel</option>
+            <option value="Left">Left</option>
+            <option value="Right">Right</option>
+          </select>
+
+          <select class="form-select mb-3" v-model="car.year">
+            <option value="">Manufactured year</option>
+            <option v-for="year in 41" :key="year" :value="year + offset">
+              {{ year + offset }}
+            </option>
+          </select>
+
+          <select class="form-select mb-3" v-model="car.fuel">
+            <option value="">Fuel type</option>
+            <option value="Gasoline">Gasoline</option>
+            <option value="Diesel">Diesel</option>
+          </select>
+
+          <select class="form-select mb-3" v-model="car.drivetype">
+            <option value="">Type of drive</option>
+            <option value="All-wheel-drive">All-wheel-drive</option>
+            <option value="Front-wheel-drive">Front-wheel-drive</option>
+            <option value="Rear-wheel-drive">Rear-wheel-drive</option>
+          </select>
+
+          <select class="form-select mb-3" v-model="car.transmission">
             <option value="">Select car transmission</option>
             <option value="Automatic">Automatic</option>
             <option value="Manual">Manual</option>
+            <option value="Continuously variable transmission">
+              Continuously variable transmission
+            </option>
+            <option value="Semi-automatic and dual-clutch transmissions">
+              Semi-automatic and dual-clutch transmissions.
+            </option>
           </select>
+          <div class="mb-3">
+            <input
+              v-model="car.price"
+              type="number"
+              class="form-control"
+              placeholder="Car price"
+            />
+          </div>
           <div class="mb-3">
             <label for="formFile" class="form-label">Car image</label>
             <input
@@ -107,17 +133,33 @@ export default {
     return {
       car: {
         model: "",
-        year: null,
+        steeringWheel: "",
+        year: "",
+        fuel: "",
+        drivetype: "",
         transmission: "",
+        price: "",
         img: null,
         imageUrl: "",
       },
       imgNotUploaded: true,
       imgUploading: false,
+      offset: 1979,
     };
   },
   computed: {
     ...mapState(["carList"]),
+  },
+  watch: {
+    car: {
+      handler(newValue) {
+        if (newValue.imageUrl) {
+          this.imgNotUploaded = false;
+          this.imgUploading = false;
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     ...mapActions(["removeCar"]),
