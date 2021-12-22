@@ -21,6 +21,11 @@ const routes = [
     path: '/cars',
     name: 'CarlistAdmin',
     component: () => import(/* webpackChunkName: "about" */ '../views/CarlistAdmin.vue')
+  },
+  {
+    path: '/car/:id',
+    name: 'SingleCar',
+    component: () => import(/* webpackChunkName: "about" */ '../views/SingleCar.vue')
   }
 ]
 

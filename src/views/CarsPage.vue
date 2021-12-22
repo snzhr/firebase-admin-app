@@ -2,8 +2,8 @@
   <div class="about container my-3">
     <h1>Cars</h1>
     <Loader class="customLoader" v-if="carList.length === 0" />
-
-    <div class="cars d-flex flex-wrap">
+    <div v-if="carList.length === 0">No cars</div>
+    <div v-else class="cars d-flex flex-wrap">
       <div
         class="card mx-2"
         style="width: 18rem"
@@ -12,7 +12,9 @@
       >
         <img :src="car.imageUrl" class="card-img-top" :alt="car.model" />
         <div class="card-body">
-          <h5 class="card-title">{{ car.model }}</h5>
+          <h5 class="card-title" @click="$router.push(`/car/${car.id}`)">
+            {{ car.model }}
+          </h5>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price per day: {{ car.price }}$</li>

@@ -19,8 +19,12 @@ export default createStore({
     }
   },
   actions: {
+    
     createCar({commit},{model,steeringWheel, year, fuel,drivetype, transmission, price,img,imageUrl}){
-      db.collection("cars").add({
+    let newCarRef = db.collection('cars').doc();
+    newCarRef.set({
+        id: newCarRef.id,
+        booked: false,
         model,
         steeringWheel,
         year, 
@@ -29,11 +33,11 @@ export default createStore({
         transmission,
         price,
         img,
-        imageUrl  
-    })
-    .then((docRef) => {
+        imageUrl
+          })
+    .then(() => {
         commit("CHANGE_LOADER_STATUS")
-        console.log("Document written with ID: ", docRef.id);
+        console.log("Document written with ID: ");
     })
     .catch((error) => {
         console.error("Error adding document: ", error);

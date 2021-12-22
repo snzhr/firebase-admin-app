@@ -49,7 +49,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.username, this.password)
         .then((data) => {
-          console.log("user logged in", data.user);
           if (data.user) {
             this.$store.state.isAuthenticated = true;
             this.$router.replace("/");
