@@ -29,20 +29,20 @@
           :alt="car.model"
         />
         <div class="card-body">
-          <h5 class="card-title" @click="$router.push(`/car/${car.id}`)">
+          <h5 class="card-title">
             {{ car.model }}
           </h5>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price per day: {{ car.price }}$</li>
           <li class="list-group-item">Year: {{ car.year }}</li>
-          <li class="list-group-item">Transmission: {{ car.transmission }}</li>
-          <li class="list-group-item">Drive type: {{ car.drivetype }}</li>
-          <li class="list-group-item">Fuel type:{{ car.fuel }}</li>
-          <li class="list-group-item">
-            Steering wheel: {{ car.steeringWheel }}
-          </li>
         </ul>
+        <button
+          class="btn btn-outline-primary"
+          @click="$router.push(`/car/${car.id}`)"
+        >
+          More
+        </button>
       </div>
     </div>
   </div>
