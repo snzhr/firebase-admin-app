@@ -3,9 +3,9 @@
     <h1>Cars</h1>
     <Loader class="customLoader" v-if="carList.length === 0" />
     <div v-if="carList.length === 0">No cars</div>
-    <div v-else class="cars d-flex flex-wrap">
+    <div v-else class="cars d-flex flex-wrap justify-content-center">
       <div
-        class="card position-relative mx-2"
+        class="card position-relative mx-3 my-2"
         style="width: 18rem"
         v-for="car in carList"
         :key="car.id"

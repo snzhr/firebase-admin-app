@@ -109,18 +109,18 @@
 
   <div class="container my-3">
     <h1>Car list admin</h1>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex flex-wrap justify-content-center">
       <div
         class="card mb-3 mx-2"
-        style="width: 45vw"
+        style="width: 40vw"
         v-for="car in carList"
         :key="car.model"
       >
         <div class="row g-0">
-          <div class="col-md-4 position-relative">
+          <div class="col-md-5 position-relative">
             <img
               :src="car.imageUrl"
-              class="img-fluid rounded-start"
+              class="img-fluid p-1 rounded-start"
               :alt="car.model"
             />
             <div
@@ -154,7 +154,7 @@
               Available
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <div class="card-body">
               <h5 class="card-title">{{ car.model }}</h5>
 
