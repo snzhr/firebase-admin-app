@@ -9,3 +9,10 @@ Frontend part
 Backend part
 
 - Firebase (Auth, Firestore, Storage)
+
+You can check demo => [here](http://avtorent.netlify.com/).
+
+Admin credentials:
+
+- email: admin@bk.kg
+- password: admin123
