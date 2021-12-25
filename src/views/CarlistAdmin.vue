@@ -117,12 +117,42 @@
         :key="car.model"
       >
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="col-md-4 position-relative">
             <img
               :src="car.imageUrl"
               class="img-fluid rounded-start"
               :alt="car.model"
             />
+            <div
+              v-if="car.booked"
+              class="
+                bg-danger
+                position-absolute
+                top-0
+                end-0
+                p-1
+                m-1
+                rounded
+                text-white
+              "
+            >
+              Booked
+            </div>
+            <div
+              v-if="car.booked === false"
+              class="
+                bg-success
+                position-absolute
+                top-0
+                end-0
+                p-1
+                m-1
+                rounded
+                text-white
+              "
+            >
+              Available
+            </div>
           </div>
           <div class="col-md-8">
             <div class="card-body">
