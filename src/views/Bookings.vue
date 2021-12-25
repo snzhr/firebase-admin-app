@@ -9,11 +9,16 @@
         :key="book.id"
       >
         <div
-          class="card-header"
+          class="card-header d-flex align-items-center justify-content-between"
           style="cursor: pointer"
-          @click="$router.push(`/car/${book.bookedCarId}`)"
         >
           Car: {{ book.bookedCar }}
+          <button
+            @click="removeBooking(book.id)"
+            class="btn btn-outline-danger"
+          >
+            Delete
+          </button>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Booker: {{ book.fullname }}</li>
@@ -21,6 +26,12 @@
           <li class="list-group-item">From: {{ book.dateFrom }}</li>
           <li class="list-group-item">To: {{ book.dateTo }}</li>
         </ul>
+        <button
+          @click="$router.push(`/car/${book.bookedCarId}`)"
+          class="btn btn-outline-primary align-self-center m-1 px-5"
+        >
+          More
+        </button>
       </div>
     </div>
   </div>
@@ -40,9 +51,22 @@ export default {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           this.bookings.push(doc.data());
-          // console.log(doc.id, " => ", doc.data());
         });
       });
+  },
+  methods: {
+    async removeBooking(id) {
+      const res = await db
+        .collection("bookings")
+        .doc(id)
+        .delete()
+        .then(() => {
+          console.log("Document successfully deleted!");
+        })
+        .catch((error) => {
+          console.error("Error removing document: ", error);
+        });
+    },
   },
 };
 </script>

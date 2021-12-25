@@ -75,6 +75,10 @@
             />
           </div>
           <div class="mb-3">
+            Booked
+            <input v-model="car.booked" type="checkbox" class="" />
+          </div>
+          <div class="mb-3">
             <label for="formFile" class="form-label">Car image</label>
             <input
               @change="fileHandler"
@@ -123,6 +127,7 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{ car.model }}</h5>
+
               <button
                 class="btn btn-primary me-3"
                 @click="edit(car)"
@@ -153,6 +158,7 @@ export default {
   data() {
     return {
       car: {
+        booked: false,
         model: "",
         steeringWheel: "",
         year: "",
