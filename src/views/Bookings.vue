@@ -1,6 +1,6 @@
 <template>
   <div class="container my-5">
-    <h1>Booking view</h1>
+    <h1>Booked cars</h1>
     <div class="bookings d-flex">
       <div
         class="card m-2"

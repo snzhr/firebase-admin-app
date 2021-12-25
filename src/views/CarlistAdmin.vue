@@ -117,29 +117,12 @@
         :key="car.model"
       >
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="col-md-4 position-relative">
             <img
               :src="car.imageUrl"
               class="img-fluid rounded-start"
               :alt="car.model"
             />
-          </div>
-          <div class="col-md-8 position-relative">
-            <div class="card-body">
-              <h5 class="card-title">{{ car.model }}</h5>
-
-              <button
-                class="btn btn-primary me-3"
-                @click="edit(car)"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Edit
-              </button>
-              <button class="btn btn-danger" @click="removeCar(car)">
-                Delete
-              </button>
-            </div>
             <div
               v-if="car.booked"
               class="
@@ -169,6 +152,23 @@
               "
             >
               Available
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ car.model }}</h5>
+
+              <button
+                class="btn btn-primary me-3"
+                @click="edit(car)"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Edit
+              </button>
+              <button class="btn btn-danger" @click="removeCar(car)">
+                Delete
+              </button>
             </div>
           </div>
         </div>

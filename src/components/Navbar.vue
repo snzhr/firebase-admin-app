@@ -1,5 +1,7 @@
 <template>
-  <nav class="navbar align-items-center navbar-expand-lg navbar-light">
+  <nav
+    class="navbar navbar-dark align-items-center navbar-expand-lg navbar-light"
+  >
     <div class="container">
       <span class="navbar-brand" @click="$router.push('/')">Car rent</span>
       <button
