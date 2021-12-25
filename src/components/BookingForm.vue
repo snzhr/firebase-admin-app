@@ -53,15 +53,27 @@
             />
           </div>
         </div>
-        <div class="modal-footer">
+
+        <div class="my__modal__footer">
+          <div
+            v-if="isBooked"
+            class="booked__message p-1 rounded bg-success text-white my-1"
+          >
+            <span class="">Booked</span>
+          </div>
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-secondary me-2"
             data-bs-dismiss="modal"
           >
             Close
           </button>
-          <button type="button" @click="bookCar(car)" class="btn btn-primary">
+          <button
+            :disabled="isBooked"
+            type="button"
+            @click="bookCar(car)"
+            class="btn btn-primary"
+          >
             Book
           </button>
         </div>
@@ -86,6 +98,7 @@ export default {
         dateFrom: "",
         dateTo: "",
       },
+      isBooked: false,
     };
   },
   methods: {
@@ -102,6 +115,7 @@ export default {
           dateTo: this.booking.dateTo,
         })
         .then(() => {
+          this.isBooked = true;
           console.log("Car is Booked");
         })
         .catch((error) => {
@@ -125,5 +139,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.my__modal__footer {
+  padding: 0.5em;
+}
 </style>
