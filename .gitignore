@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/src/fbconfig.js
+/src/fbconfig
 
 
 # local env files
