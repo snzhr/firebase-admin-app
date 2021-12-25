@@ -1,19 +1,11 @@
-# firebase-admin-app
+## Car rent web application
 
-## Project setup
-```
-npm install
-```
+Simple car rent web application with simple admin panel.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Frontend part
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Vue 3, Vuex, Bootstrap 5
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Backend part
+
+- Firebase (Auth, Firestore, Storage)
